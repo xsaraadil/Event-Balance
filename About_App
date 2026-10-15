@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ميزان المواقف - عن التطبيق</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #6C63FF 0%, #4A42D4 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px 20px 0 20px;
+            background: white;
+        }
+
+        .lang-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: #1e293b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #6C63FF, #4A42D4);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.05);
+            background: #e2e8f0;
+        }
+
+        /* Content Sections */
+        .content { display: none; padding: 40px 50px 50px 50px; }
+        .content.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: 40px; }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #6C63FF, #4A42D4);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px -5px rgba(108, 99, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logo span { font-size: 56px; }
+
+        h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #6C63FF, #4A42D4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .version {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section { margin: 50px 0; }
+
+        .section-title {
+            font-size: 28px;
+            color: #1e293b;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #6C63FF;
+            display: inline-block;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+            border-color: #6C63FF;
+        }
+
+        .feature-icon { font-size: 40px; margin-bottom: 15px; }
+
+        .feature-card h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #6C63FF15, #4A42D415);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #4a5568;
+            border: 1px solid #6C63FF30;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6C63FF, #4A42D4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* Info Table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f8fafc;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .info-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-table tr:last-child td { border-bottom: none; }
+
+        .info-table td:first-child {
+            font-weight: 600;
+            color: #4A42D4;
+            width: 200px;
+            background: #f1f5f9;
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover { color: #6C63FF; }
+
+        .faq-answer {
+            color: #64748b;
+            padding-top: 10px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .faq-answer.show { display: block; }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin: 40px 0 20px;
+            padding: 40px;
+            background: linear-gradient(135deg, #6C63FF, #4A42D4);
+            border-radius: 30px;
+            color: white;
+        }
+
+        .cta-section h3 { font-size: 24px; margin-bottom: 15px; }
+        .cta-section p { opacity: 0.9; margin-bottom: 20px; }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #6C63FF;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 30px 20px; }
+            h1 { font-size: 28px; }
+            .section-title { font-size: 22px; }
+            .info-table td:first-child { width: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="switchLanguage('ar')">🇸🇦 العربية</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">🇬🇧 English</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+        </div>
+
+        <!-- ========== ARABIC ========== -->
+        <div id="arabic" class="content active" dir="rtl">
+            <div class="header">
+                <div class="logo"><span>⚖️</span></div>
+                <h1>ميزان المواقف</h1>
+                <div class="version">الإصدار 1.0</div>
+                <p class="tagline">
+                    وازن علاقاتك، موقفاً بموقف — سجّل ما يفعله الناس معك، جيداً كان أم سيئاً أم محايداً
+                </p>
+            </div>
+
+            <!-- رؤيتنا -->
+            <div class="section">
+                <h2 class="section-title">🎯 رؤيتنا</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    نؤمن أن الوعي هو أساس العلاقات الصحية. لهذا بنينا ميزان المواقف ليكون أداة شخصية
+                    تساعدك على تتبع ما يفعله الآخرون معك، وتحويل المواقف اليومية إلى أرقام واضحة،
+                    لتعرف من يعطيك أكثر ومن يأخذ منك.
+                </p>
+            </div>
+
+            <!-- الميزات -->
+            <div class="section">
+                <h2 class="section-title">✨ مميزات التطبيق</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>تسجيل المواقف</h3>
+                        <p>سجّل كل موقف مع أي شخص: جيد ✅، سيء ❌، أو محايد ⚪ — مع وصف تفصيلي.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>درجة لكل موقف</h3>
+                        <p>أعطِ كل موقف درجة من -10 إلى +10 حسب حجم تأثيره عليك، ويُحدَّث مجموع النقاط فورياً.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏷️</div>
+                        <h3>12 تصنيفاً للمواقف</h3>
+                        <p>مساعدة، دعم، هدية، صدق، احترام / خيانة، كذب، إهانة، إهمال / حديث، لقاء.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>إحصائيات ورسوم بيانية</h3>
+                        <p>رسوم دائرية وعمودية لكل شخص، مع ترتيب الأشخاص حسب مجموع النقاط.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>حماية PIN</h3>
+                        <p>قفل التطبيق برمز من 4 أرقام مع تشفير AES-256 لحماية خصوصيتك.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>3 لغات</h3>
+                        <p>العربية، English، Français — مع دعم كامل لاتجاه RTL في العربية.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>نسخ احتياطي</h3>
+                        <p>صدّر بياناتك بصيغة JSON واستوردها على أي جهاز آخر.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📴</div>
+                        <h3>يعمل بدون إنترنت</h3>
+                        <p>كل بياناتك محلية على جهازك — لا نجمع أي معلومات عنك.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التقنيات -->
+            <div class="section">
+                <h2 class="section-title">⚙️ التقنيات المستخدمة</h2>
+                <div class="tech-stack">
+                    <span class="tech-item">📱 Android (Kotlin)</span>
+                    <span class="tech-item">🗄️ Room / SQLite</span>
+                    <span class="tech-item">🎨 Material Design 3</span>
+                    <span class="tech-item">📊 MPAndroidChart</span>
+                    <span class="tech-item">🔐 EncryptedSharedPreferences</span>
+                    <span class="tech-item">🔄 Coroutines + Flow</span>
+                    <span class="tech-item">🏗️ MVVM Architecture</span>
+                </div>
+            </div>
+
+            <!-- إحصائيات -->
+            <div class="section">
+                <h2 class="section-title">📊 إحصائيات التطبيق</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">لغات مدعومة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">تصنيفاً للمواقف</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">-10 / +10</div>
+                        <div class="stat-label">نطاق الدرجة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">بدون إنترنت</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات التطبيق -->
+            <div class="section">
+                <h2 class="section-title">📋 معلومات التطبيق</h2>
+                <table class="info-table">
+                    <tr>
+                        <td>الاسم</td>
+                        <td>ميزان المواقف</td>
+                    </tr>
+                    <tr>
+                        <td>الإصدار</td>
+                        <td>1.0.0</td>
+                    </tr>
+                    <tr>
+                        <td>الفئة</td>
+                        <td>الإنتاجية الشخصية</td>
+                    </tr>
+                    <tr>
+                        <td>المنصة</td>
+                        <td>Android</td>
+                    </tr>
+                    <tr>
+                        <td>اللغات</td>
+                        <td>العربية، English، Français</td>
+                    </tr>
+                    <tr>
+                        <td>المطوّرة</td>
+                        <td>Sara Sami</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- الأسئلة الشائعة -->
+            <div class="section">
+                <h2 class="section-title">❓ الأسئلة الشائعة</h2>
+                <div class="faq">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>هل التطبيق مجاني؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">نعم، ميزان المواقف مجاني بالكامل ولا يحتوي على إعلانات.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>هل بياناتي آمنة؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">نعم، كل بياناتك مخزّنة محلياً على جهازك فقط. لا نجمع أي بيانات ولا نتصل بأي خادم خارجي.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>هل يمكنني نقل بياناتي لجهاز آخر؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">نعم، من قائمة الإعدادات يمكنك تصدير بياناتك كملف JSON واستيرادها على أي جهاز آخر.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>هل يحتاج التطبيق إنترنت؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">لا، التطبيق يعمل بالكامل بدون إنترنت. يمكنك تسجيل المواقف وعرض الإحصائيات في أي وقت.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>كيف أحمي التطبيق بكلمة مرور؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">عند أول تشغيل سيُطلب منك إعداد رمز PIN من 4 أرقام. يمكنك تغييره أو إزالته من القائمة.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h3>💡 لديك اقتراح أو استفسار؟</h3>
+                <p>نرحب بملاحظاتك واقتراحاتك لتطوير التطبيق</p>
+                <a href="mailto:sarasami19942@gmail.com" class="cta-button">📧 تواصلي معي</a>
+            </div>
+
+            <div class="footer">
+                <p>© 2026 ميزان المواقف - جميع الحقوق محفوظة</p>
+                <p style="margin-top: 5px; font-size: 11px;">الإصدار 1.0 | تطوير: Sara Sami</p>
+            </div>
+        </div>
+
+        <!-- ========== ENGLISH ========== -->
+        <div id="english" class="content" dir="ltr">
+            <div class="header">
+                <div class="logo"><span>⚖️</span></div>
+                <h1>Mizan</h1>
+                <div class="version">Version 1.0</div>
+                <p class="tagline">
+                    Balance your relationships, one event at a time — Track what people do with you: good, bad, or neutral
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🎯 Our Vision</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    We believe awareness is the foundation of healthy relationships. That's why we built Mizan — 
+                    a personal tool that helps you track what others do with you and turn daily events into 
+                    clear numbers, so you know who gives you more and who takes from you.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">✨ Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Record Events</h3>
+                        <p>Record every event with anyone: Good ✅, Bad ❌, or Neutral ⚪ — with detailed description.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Score Each Event</h3>
+                        <p>Give each event a score from -10 to +10 based on its impact, and see your total update instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏷️</div>
+                        <h3>12 Categories</h3>
+                        <p>Help, Support, Gift, Honesty, Respect / Betrayal, Lie, Insult, Neglect / Talk, Meeting.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Charts & Statistics</h3>
+                        <p>Pie and Bar charts for each person, with ranking by total score.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>PIN Protection</h3>
+                        <p>Lock the app with a 4-digit PIN and AES-256 encryption to protect your privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>3 Languages</h3>
+                        <p>العربية, English, Français — with full RTL support for Arabic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Backup & Restore</h3>
+                        <p>Export your data as JSON and import it on any other device.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📴</div>
+                        <h3>Works Offline</h3>
+                        <p>All data is local to your device — we never collect any information about you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⚙️ Technology Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-item">📱 Android (Kotlin)</span>
+                    <span class="tech-item">🗄️ Room / SQLite</span>
+                    <span class="tech-item">🎨 Material Design 3</span>
+                    <span class="tech-item">📊 MPAndroidChart</span>
+                    <span class="tech-item">🔐 EncryptedSharedPreferences</span>
+                    <span class="tech-item">🔄 Coroutines + Flow</span>
+                    <span class="tech-item">🏗️ MVVM Architecture</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📊 App Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Supported Languages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Event Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">-10 / +10</div>
+                        <div class="stat-label">Score Range</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Offline</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📋 App Information</h2>
+                <table class="info-table">
+                    <tr><td>Name</td><td>Mizan</td></tr>
+                    <tr><td>Version</td><td>1.0.0</td></tr>
+                    <tr><td>Category</td><td>Personal Productivity</td></tr>
+                    <tr><td>Platform</td><td>Android</td></tr>
+                    <tr><td>Languages</td><td>العربية, English, Français</td></tr>
+                    <tr><td>Developer</td><td>Sara Sami</td></tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                <div class="faq">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Is the app free?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Yes, Mizan is completely free and has no ads.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Is my data safe?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Yes, all your data is stored locally on your device. We don't collect any data and don't connect to any external server.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Can I transfer my data to another device?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Yes, from the Settings menu you can export your data as a JSON file and import it on any other device.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Does the app require internet?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">No, the app works completely offline. You can record events and view statistics at any time.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How do I protect the app with a password?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">On first launch, you'll be asked to set a 4-digit PIN. You can change or remove it from the menu.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>💡 Have a suggestion or question?</h3>
+                <p>We welcome your feedback to improve the app</p>
+                <a href="mailto:sarasami19942@gmail.com" class="cta-button">📧 Contact Me</a>
+            </div>
+
+            <div class="footer">
+                <p>© 2026 Mizan - All Rights Reserved</p>
+                <p style="margin-top: 5px; font-size: 11px;">Version 1.0 | Developed by Sara Sami</p>
+            </div>
+        </div>
+
+        <!-- ========== FRANÇAIS ========== -->
+        <div id="french" class="content" dir="ltr">
+            <div class="header">
+                <div class="logo"><span>⚖️</span></div>
+                <h1>La Balance des Événements</h1>
+                <div class="version">Version 1.0</div>
+                <p class="tagline">
+                    Équilibrez vos relations, un événement à la fois — Suivez ce que les gens font avec vous : bien, mal ou neutre
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🎯 Notre Vision</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    Nous croyons que la conscience est la base de relations saines. C'est pourquoi nous avons créé 
+                    La Balance des Événements — un outil personnel qui vous aide à suivre ce que les autres font 
+                    avec vous et à transformer les événements quotidiens en chiffres clairs.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">✨ Fonctionnalités principales</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Enregistrer des événements</h3>
+                        <p>Enregistrez chaque événement : Bien ✅, Mauvais ❌, ou Neutre ⚪ — avec description détaillée.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Score pour chaque événement</h3>
+                        <p>Donnez à chaque événement un score de -10 à +10 selon son impact, et voyez le total mis à jour instantanément.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏷️</div>
+                        <h3>12 catégories</h3>
+                        <p>Aide, Soutien, Cadeau, Honnêteté, Respect / Trahison, Mensonge, Insulte, Négligence / Discussion, Rendez-vous.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Graphiques et statistiques</h3>
+                        <p>Graphiques circulaires et à barres pour chaque personne, avec classement par score total.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Protection PIN</h3>
+                        <p>Verrouillez l'application avec un code PIN de 4 chiffres et un chiffrement AES-256.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>3 langues</h3>
+                        <p>العربية, English, Français — avec support complet RTL pour l'arabe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Sauvegarde et restauration</h3>
+                        <p>Exportez vos données en JSON et importez-les sur n'importe quel appareil.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📴</div>
+                        <h3>Fonctionne hors ligne</h3>
+                        <p>Toutes les données sont locales à votre appareil — nous ne collectons aucune information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⚙️ Technologies utilisées</h2>
+                <div class="tech-stack">
+                    <span class="tech-item">📱 Android (Kotlin)</span>
+                    <span class="tech-item">🗄️ Room / SQLite</span>
+                    <span class="tech-item">🎨 Material Design 3</span>
+                    <span class="tech-item">📊 MPAndroidChart</span>
+                    <span class="tech-item">🔐 EncryptedSharedPreferences</span>
+                    <span class="tech-item">🔄 Coroutines + Flow</span>
+                    <span class="tech-item">🏗️ Architecture MVVM</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📊 Statistiques de l'application</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Langues supportées</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Catégories d'événements</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">-10 / +10</div>
+                        <div class="stat-label">Plage de score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Hors ligne</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📋 Informations sur l'application</h2>
+                <table class="info-table">
+                    <tr><td>Nom</td><td>La Balance des Événements</td></tr>
+                    <tr><td>Version</td><td>1.0.0</td></tr>
+                    <tr><td>Catégorie</td><td>Productivité personnelle</td></tr>
+                    <tr><td>Plateforme</td><td>Android</td></tr>
+                    <tr><td>Langues</td><td>العربية, English, Français</td></tr>
+                    <tr><td>Développeuse</td><td>Sara Sami</td></tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">❓ Questions fréquentes</h2>
+                <div class="faq">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>L'application est-elle gratuite ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Oui, La Balance des Événements est entièrement gratuite et sans publicité.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Mes données sont-elles en sécurité ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Oui, toutes vos données sont stockées localement sur votre appareil. Nous ne collectons aucune donnée.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Puis-je transférer mes données vers un autre appareil ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Oui, depuis le menu Paramètres, vous pouvez exporter vos données en JSON et les importer sur n'importe quel appareil.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>L'application nécessite-t-elle Internet ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Non, l'application fonctionne entièrement hors ligne.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Comment protéger l'application avec un mot de passe ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Au premier lancement, un PIN à 4 chiffres vous sera demandé. Vous pouvez le modifier ou le supprimer depuis le menu.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>💡 Une suggestion ou une question ?</h3>
+                <p>Nous accueillons vos commentaires pour améliorer l'application</p>
+                <a href="mailto:sarasami19942@gmail.com" class="cta-button">📧 Contactez-moi</a>
+            </div>
+
+            <div class="footer">
+                <p>© 2026 La Balance des Événements - Tous droits réservés</p>
+                <p style="margin-top: 5px; font-size: 11px;">Version 1.0 | Développé par Sara Sami</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            // Reset all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Hide all content
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+
+            // Activate selected
+            if (lang === 'ar') {
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+                document.getElementById('arabic').classList.add('active');
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else if (lang === 'en') {
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+                document.getElementById('english').classList.add('active');
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = 'en';
+            } else {
+                document.querySelectorAll('.lang-btn')[2].classList.add('active');
+                document.getElementById('french').classList.add('active');
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = 'fr';
+            }
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('show');
+            const arrow = element.querySelector('span:last-child');
+            arrow.textContent = answer.classList.contains('show') ? '▲' : '▼';
+        }
+    </script>
+</body>
+</html>
