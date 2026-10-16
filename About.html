@@ -24,7 +24,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
-        /* Language Switcher */
         .lang-switch {
             display: flex;
             justify-content: flex-end;
@@ -55,7 +54,6 @@
             background: #e2e8f0;
         }
 
-        /* Content Sections */
         .content { display: none; padding: 40px 50px 50px 50px; }
         .content.active { display: block; animation: fadeIn 0.5s ease; }
 
@@ -64,7 +62,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header */
         .header { text-align: center; margin-bottom: 40px; }
 
         .logo {
@@ -115,7 +112,6 @@
             margin: 0 auto;
         }
 
-        /* Sections */
         .section { margin: 50px 0; }
 
         .section-title {
@@ -127,7 +123,6 @@
             display: inline-block;
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -163,7 +158,6 @@
             font-size: 14px;
         }
 
-        /* Tech Stack */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -180,7 +174,6 @@
             border: 1px solid #6C63FF30;
         }
 
-        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -210,7 +203,6 @@
             margin-top: 8px;
         }
 
-        /* Info Table */
         .info-table {
             width: 100%;
             border-collapse: collapse;
@@ -234,7 +226,6 @@
             background: #f1f5f9;
         }
 
-        /* FAQ */
         .faq-item {
             margin: 15px 0;
             border-bottom: 1px solid #e2e8f0;
@@ -262,7 +253,6 @@
 
         .faq-answer.show { display: block; }
 
-        /* CTA */
         .cta-section {
             text-align: center;
             margin: 40px 0 20px;
@@ -292,7 +282,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* Footer */
         .footer {
             text-align: center;
             padding-top: 40px;
@@ -301,6 +290,9 @@
             color: #94a3b8;
             font-size: 13px;
         }
+
+        .footer a { color: #6C63FF; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
             .content { padding: 30px 20px; }
@@ -369,6 +361,11 @@
                         <p>قفل التطبيق برمز من 4 أرقام مع تشفير AES-256 لحماية خصوصيتك.</p>
                     </div>
                     <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>تذكير يومي</h3>
+                        <p>يطلب التطبيق إذن الإشعارات، ثم يرسل لك تذكيراً لطيفاً كل ليلة قبل النوم لتسجيل مواقف يومك.</p>
+                    </div>
+                    <div class="feature-card">
                         <div class="feature-icon">🌍</div>
                         <h3>3 لغات</h3>
                         <p>العربية، English، Français — مع دعم كامل لاتجاه RTL في العربية.</p>
@@ -384,6 +381,21 @@
                         <p>كل بياناتك محلية على جهازك — لا نجمع أي معلومات عنك.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- تذكير يومي -->
+            <div class="section">
+                <h2 class="section-title">🔔 التذكير اليومي</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    يوفّر التطبيق ميزة <strong>التذكير اليومي</strong> — إشعار لطيف يصلك
+                    كل ليلة قبل النوم، يذكّرك بتسجيل مواقف يومك بينما هي لا تزال حاضرة في ذاكرتك.
+                </p>
+                <ul style="margin-top: 15px; padding-inline-start: 25px; color: #475569; line-height: 1.8;">
+                    <li>🔔 عند تفعيل الميزة، يطلب التطبيق <strong>إذن الإشعارات</strong> من نظام أندرويد</li>
+                    <li>⏰ اختر الوقت الذي يناسبك (افتراضياً 9:00 مساءً)</li>
+                    <li>📴 الإشعارات <strong>محلية بالكامل</strong> — لا تحتاج إنترنت، ولا تُرسل عبر أي خادم</li>
+                    <li>🔕 يمكنك إيقافها في أي وقت من القائمة</li>
+                </ul>
             </div>
 
             <!-- التقنيات -->
@@ -427,30 +439,12 @@
             <div class="section">
                 <h2 class="section-title">📋 معلومات التطبيق</h2>
                 <table class="info-table">
-                    <tr>
-                        <td>الاسم</td>
-                        <td>ميزان المواقف</td>
-                    </tr>
-                    <tr>
-                        <td>الإصدار</td>
-                        <td>1.0.0</td>
-                    </tr>
-                    <tr>
-                        <td>الفئة</td>
-                        <td>الإنتاجية الشخصية</td>
-                    </tr>
-                    <tr>
-                        <td>المنصة</td>
-                        <td>Android</td>
-                    </tr>
-                    <tr>
-                        <td>اللغات</td>
-                        <td>العربية، English، Français</td>
-                    </tr>
-                    <tr>
-                        <td>المطوّرة</td>
-                        <td>Sara Sami</td>
-                    </tr>
+                    <tr><td>الاسم</td><td>ميزان المواقف</td></tr>
+                    <tr><td>الإصدار</td><td>1.0.0</td></tr>
+                    <tr><td>الفئة</td><td>الإنتاجية الشخصية</td></tr>
+                    <tr><td>المنصة</td><td>Android</td></tr>
+                    <tr><td>اللغات</td><td>العربية، English، Français</td></tr>
+                    <tr><td>المطوّرة</td><td>Sara Sami</td></tr>
                 </table>
             </div>
 
@@ -493,6 +487,13 @@
                         </div>
                         <div class="faq-answer">عند أول تشغيل سيُطلب منك إعداد رمز PIN من 4 أرقام. يمكنك تغييره أو إزالته من القائمة.</div>
                     </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>كيف يعمل التذكير اليومي؟</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">عند تفعيل الميزة، يطلب التطبيق إذن الإشعارات من نظام أندرويد. بعد الموافقة، يمكنك اختيار الوقت الذي تريد أن يصلك فيه التذكير (افتراضياً 9 مساءً). الإشعارات محلية بالكامل — لا تحتاج إنترنت. يمكنك إيقافها في أي وقت.</div>
+                    </div>
                 </div>
             </div>
 
@@ -505,6 +506,10 @@
 
             <div class="footer">
                 <p>© 2026 ميزان المواقف - جميع الحقوق محفوظة</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">سياسة الخصوصية</a> ·
+                    <a href="About.html">حول التطبيق</a>
+                </p>
                 <p style="margin-top: 5px; font-size: 11px;">الإصدار 1.0 | تطوير: Sara Sami</p>
             </div>
         </div>
@@ -558,6 +563,11 @@
                         <p>Lock the app with a 4-digit PIN and AES-256 encryption to protect your privacy.</p>
                     </div>
                     <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Daily Reminder</h3>
+                        <p>The app asks for notification permission, then sends a gentle reminder every night before sleep to record your day's events.</p>
+                    </div>
+                    <div class="feature-card">
                         <div class="feature-icon">🌍</div>
                         <h3>3 Languages</h3>
                         <p>العربية, English, Français — with full RTL support for Arabic.</p>
@@ -573,6 +583,21 @@
                         <p>All data is local to your device — we never collect any information about you.</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🔔 Daily Reminder</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    The app offers a <strong>Daily Reminder</strong> — a gentle notification
+                    that reaches you every night before sleep, reminding you to record your day's
+                    events while they're still fresh in your memory.
+                </p>
+                <ul style="margin-top: 15px; padding-inline-start: 25px; color: #475569; line-height: 1.8;">
+                    <li>🔔 When enabled, the app asks for <strong>notification permission</strong> from Android</li>
+                    <li>⏰ Choose the time that suits you (default: 9:00 PM)</li>
+                    <li>📴 Notifications are <strong>fully local</strong> — no internet needed, no server involved</li>
+                    <li>🔕 You can disable it anytime from the menu</li>
+                </ul>
             </div>
 
             <div class="section">
@@ -660,6 +685,13 @@
                         </div>
                         <div class="faq-answer">On first launch, you'll be asked to set a 4-digit PIN. You can change or remove it from the menu.</div>
                     </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How does the Daily Reminder work?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">When you enable this feature, the app asks for notification permission from Android. After you accept, you can choose the time you want to receive the reminder (default: 9 PM). Notifications are fully local — no internet needed. You can disable them at any time.</div>
+                    </div>
                 </div>
             </div>
 
@@ -671,6 +703,10 @@
 
             <div class="footer">
                 <p>© 2026 Mizan - All Rights Reserved</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Privacy Policy</a> ·
+                    <a href="About.html">About</a>
+                </p>
                 <p style="margin-top: 5px; font-size: 11px;">Version 1.0 | Developed by Sara Sami</p>
             </div>
         </div>
@@ -724,6 +760,11 @@
                         <p>Verrouillez l'application avec un code PIN de 4 chiffres et un chiffrement AES-256.</p>
                     </div>
                     <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Rappel quotidien</h3>
+                        <p>L'application demande l'autorisation des notifications, puis envoie un rappel doux chaque soir avant de dormir pour enregistrer vos événements.</p>
+                    </div>
+                    <div class="feature-card">
                         <div class="feature-icon">🌍</div>
                         <h3>3 langues</h3>
                         <p>العربية, English, Français — avec support complet RTL pour l'arabe.</p>
@@ -739,6 +780,21 @@
                         <p>Toutes les données sont locales à votre appareil — nous ne collectons aucune information.</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🔔 Rappel quotidien</h2>
+                <p style="color: #475569; line-height: 1.8; margin-top: 15px;">
+                    L'application propose un <strong>Rappel quotidien</strong> — une notification
+                    douce qui vous parvient chaque soir avant de dormir, vous rappelant d'enregistrer
+                    les événements de votre journée tant qu'ils sont encore frais dans votre mémoire.
+                </p>
+                <ul style="margin-top: 15px; padding-inline-start: 25px; color: #475569; line-height: 1.8;">
+                    <li>🔔 Lorsque la fonction est activée, l'application demande <strong>l'autorisation des notifications</strong> à Android</li>
+                    <li>⏰ Choisissez l'heure qui vous convient (par défaut : 21h00)</li>
+                    <li>📴 Les notifications sont <strong>entièrement locales</strong> — pas d'Internet, aucun serveur impliqué</li>
+                    <li>🔕 Vous pouvez la désactiver à tout moment depuis le menu</li>
+                </ul>
             </div>
 
             <div class="section">
@@ -826,6 +882,13 @@
                         </div>
                         <div class="faq-answer">Au premier lancement, un PIN à 4 chiffres vous sera demandé. Vous pouvez le modifier ou le supprimer depuis le menu.</div>
                     </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Comment fonctionne le Rappel quotidien ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">Lorsque vous activez cette fonction, l'application demande l'autorisation des notifications à Android. Après acceptation, vous pouvez choisir l'heure à laquelle vous souhaitez recevoir le rappel (par défaut : 21h00). Les notifications sont entièrement locales — aucun Internet nécessaire. Vous pouvez les désactiver à tout moment.</div>
+                    </div>
                 </div>
             </div>
 
@@ -837,6 +900,10 @@
 
             <div class="footer">
                 <p>© 2026 La Balance des Événements - Tous droits réservés</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Politique de Confidentialité</a> ·
+                    <a href="About.html">À propos</a>
+                </p>
                 <p style="margin-top: 5px; font-size: 11px;">Version 1.0 | Développé par Sara Sami</p>
             </div>
         </div>
@@ -844,13 +911,9 @@
 
     <script>
         function switchLanguage(lang) {
-            // Reset all buttons
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-
-            // Hide all content
             document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
 
-            // Activate selected
             if (lang === 'ar') {
                 document.querySelectorAll('.lang-btn')[0].classList.add('active');
                 document.getElementById('arabic').classList.add('active');
